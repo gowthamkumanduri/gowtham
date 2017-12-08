@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+ <body>
+<% if (data==="1") {%>
+<table>
+<tr><td>id</td><td>Name</td><td>Email</td><td>salary</td><td></tr>
+    
+    <% emplist.forEach(function(item) { %>
+    <tr>
+    <td><%=item.id%></td><td><%= item.name %> </td><td><%= item.email%></td><td><%= item.salary %></td></tr>
+    
+    <% });%>
+</table>
+<br>
+
+<%}else{%>
+<h3><%=note%>please try again</h3>
+<%}%>
+</body>
+</html>

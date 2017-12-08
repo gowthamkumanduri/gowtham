@@ -20,19 +20,27 @@ con.connect(function(err) {
   console.log("Connected!");
   });
 
-app.get('/api/users/getid',function(req,res){
-  console.log("got into get request");
-  con.query('select * from users',function(err,rows){
-    console.log("this is the result set");
-    console.log(rows);
-  	res.end(JSON.stringify(rows));
-  });
+
+app.get('/emplist', function(req, res){
+	con.query('select * from users', function(err, result){
+		if(err){
+			res.send(err);
+		}else if (result.length){
+			res.render('table',{"emplist":result, "data":"1"});
+		}else {
+			res.render('emplist',{"data":"0", "note" : "please try again"});
+		}
+	});
 });
+
+
 app.get('/api/users/find/:id',function(req,res){
   con.query('select * from users where id = ?', [req.params.id] ,function(err,rows){
   	res.end(JSON.stringify(rows));
   });
 });
+
+
 app.get('/api/users', function(req,res){
   console.log('entered get method');
   res.render('form');
@@ -41,7 +49,6 @@ app.post('/api/users',function(req,res){
   console.log("entered post method");
   console.log("value from request are");
   console.log(req.body);
- 
 	con.query('insert into users(id, name, email, salary) values(?,?,?,?)' ,[req.body.id,req.body.name,req.body.email,req.body.salary],function(err,rows){
   	res.end(JSON.stringify(rows));
   });
