@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<style>
+		table,tr,td{border:1px solid black;
+			border-collapse: collapse;}
+	</style>
  <body>
 <% if (data==="1") {%>
-<table>
-<tr><td>id</td><td>Name</td><td>Email</td><td>salary</td><td></tr>
+<table >
+<tr><td>id</td><td>Name</td><td>Email</td><td>salary</td></tr>
     
     <% emplist.forEach(function(item) { %>
     <tr>
